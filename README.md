@@ -33,9 +33,13 @@ Para executar este projeto é necessário ter instalado algumas bibliotecas e fr
 
 Para realizar a comunicação serial entre o ROS e o Arduino utilizou-se o pacote *rosserial_arduino*. Sua instalação pode ser feita rodando os seguintes comandos no terminal do Ubuntu:
 
-`sudo apt-get install ros-${ROS_DISTRO}-rosserial-arduino`
+```
+sudo apt-get install ros-${ROS_DISTRO}-rosserial-arduino
+```
 
-`sudo apt-get install ros-${ROS_DISTRO}-rosserial`
+```
+sudo apt-get install ros-${ROS_DISTRO}-rosserial
+```
 
 Foram utilizadas algumas bibliotecas para escrever o script. Essas bibliotecas fornecem funcionalidade extra e tornam o código mais simples. Bibliotecas utilizadas:
 
