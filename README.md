@@ -71,3 +71,7 @@ Comando a ser inserido no terminal do computador que irá ser utilizado durante 
 ssh {user}@{host}
 ```
 
+### Algoritmo desenvolvido para a navegação autônoma
+
+Tal algoritmo foi desenvolvido a partir de funções declaradas que definem a movimentação do robô de acordo com os dados obtidos por meio dos sensores, seguindo a lógica presente no fluxograma abaixo:
+
