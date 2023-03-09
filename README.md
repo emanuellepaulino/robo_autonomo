@@ -47,3 +47,27 @@ Foram utilizadas algumas bibliotecas para escrever o script. Essas bibliotecas f
 
 - *AFMotor.h* » biblioteca para a motor shield
 
+#### Habilitação do SSH
+
+Tendo como finalidade acessar as informações dos sensores utilizados no robô enquanto o mesmo circula pelo ambiente, foi-se utilizado o Secure Shell, também chamado de SSH, um protocolo de rede que permite acessar e administrar de forma remota servidores.
+
+Para realizar o acesso remoto foi necessário habilitar o SSH nas configurações do Raspberry e pegar o seu endereço IP por meio do comando. Os comandos necessários estão escritos abaixo:
+
+Comando para acessar as configurações do Raspberry e habilitar o SSH:
+
+```
+sudo raspi-config
+```
+
+Comando para pegar o endereço IP do Raspberry:
+
+```
+ ifconfig
+```
+
+Comando a ser inserido no terminal do computador que irá ser utilizado durante o acesso remoto, no qual {user} é o nome do usuário root e {host} é o endereço IP do Raspberry:
+
+```
+ssh {user}@{host}
+```
+
