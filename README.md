@@ -100,7 +100,40 @@ Por fim, para ser possível a comunicação via USB entre o Raspberry Pi 4  e o 
 O algoritmo foi desenvolvido a partir de funções declaradas que definem a movimentação do robô de acordo com os dados obtidos por meio dos sensores, seguindo a lógica presente no fluxograma abaixo:
 
    ![Fluxograma drawio](https://user-images.githubusercontent.com/108027884/224190799-2f68cf79-1f02-48f9-8ce8-bc4d039941b2.png) 
+   
+### :bar_chart: Leitura dos dados dos sensores
+
+Uma vez conectado o Arduino ao Raspberry Pi 4 e compilado o sketch, pode-se executar o nó ROS via rosserial. Em um terminal é enviado o seguinte comando apara iniciar o executável roscore:
+
+```
+roscore
+```
+
+Em outro terminal é iniciada a comunicação serial com o arduino por meio do seguinte comando:
+
+```
+rosrun rosserial_python serial_node.py/dev/ttyUSB0
+```
+
+Posteriormente são executadas as saídas de cada sensor, cada um em um terminal:
+
+```
+rostopic echo/Sensor_da_frente
+```
+```
+rostopic echo/Sensor_da_esquerda
+```
+```
+rostopic echo/Sensor_da_direita
+```
+```
+rostopic echo rpm
+```
+
+Os dados dos sensores podem ser acessados no próprio Raspberry, entretando, não é possível fazer a leitura dessa forma enquanto o robô se movimenta no ambiente. Por esse motivo é feita a habilitação do SSH em um computador, que terá acesso remoto ao Raspberry Pi 4, e posteriormente são rodados os mesmo comandos descritos acima.
 
 ### :movie_camera: Vídeo com os resultados obtidos 
+
+No vídeo abaixo é possível ver o acesso remoto ao Raspberry Pi 4, a leitura dos dados obtidos pelos sensores e o robô andando de forma autônoma.
 
 https://www.youtube.com/watch?v=7Vnkp2oUJuo&t=216s
