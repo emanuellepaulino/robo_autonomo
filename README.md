@@ -1,23 +1,8 @@
-# Robô Autônomo
+# Robô Autônomo :robot:
 
-Neste projeto foi desenvolvido um robô capaz de se locomover de forma autônoma, por meio do processamento dos dados de interação sensorial com o ambiente, através da comunicação serial entre o ROS e o Arduino. O robô utilizou para detecção de obstáculos sensores ultrassônicos e a velocidade de uma de suas rodas pôde ser lida por meio de um sensor de velocidade. Os dados obtidos pelos sensores foram acessados de forma remota, enquanto o rob
+Neste projeto foi desenvolvido um robô capaz de se locomover de forma autônoma, por meio do processamento dos dados de interação sensorial com o ambiente, através da comunicação serial entre o ROS e o Arduino. O robô utilizou para detecção de obstáculos sensores ultrassônicos e a velocidade de uma de suas rodas pôde ser lida por meio de um sensor de velocidade. Os dados obtidos pelos sensores foram acessados de forma remota, enquanto o robô navegava pelo ambiente.
 
-### Material utilizado
-
-- 1 x Arduino MEGA 2560
-- 1 x Motor Shield L293D
-- 4 x Motor JGB37-520 DC12V333RPM
-- 3 x Sensor Ultrassônico HC-SR04
-- 1 x Módulo Encoder Acoplador Óptico
-- 1 x Disco Encoder
-- 1 x Raspberry Pi 4
-- 1 x Powerbank
-- 1 x Fonte Externa de 12V
-- 1 x Botão on/off
-- 1 x Chassi
-- 1 x Computador para acesso remoto ao robô
-
-### Pré-requisitos
+### :desktop_computer: Pré-requisitos
 
 Para executar este projeto é necessário ter instalado algumas bibliotecas e frameworks. O projeto foi desenvolvido, testado e implementado no:
 
@@ -29,7 +14,7 @@ Para executar este projeto é necessário ter instalado algumas bibliotecas e fr
 
 É necessário instalar no computador o Ubuntu e o ROS, e instalar no Raspberry Pi o Ubuntu, o ROS e a IDE do Arduino. É interessante ter a mesma versão do sistema operacional e do ROS em ambos, para que não tenham problemas com compatibilidade.
 
-#### Dependências
+#### :mag_right: Dependências
 
 Para realizar a comunicação serial entre o ROS e o Arduino utilizou-se o pacote *rosserial_arduino*. Sua instalação pode ser feita rodando os seguintes comandos no terminal do Ubuntu:
 
@@ -47,7 +32,7 @@ Foram utilizadas algumas bibliotecas para escrever o script. Essas bibliotecas f
 
 - *AFMotor.h* » biblioteca para a motor shield
 
-#### Habilitação do SSH
+#### :computer: Habilitação do SSH
 
 Tendo como finalidade acessar as informações dos sensores utilizados no robô enquanto o mesmo circula pelo ambiente, foi-se utilizado o Secure Shell, também chamado de SSH, um protocolo de rede que permite acessar e administrar de forma remota servidores.
 
@@ -70,183 +55,52 @@ Comando a ser inserido no terminal do computador que irá ser utilizado durante 
 ```
 ssh {user}@{host}
 ```
+  
+### :wrench: Montagem do robô 
 
-### Algoritmo desenvolvido para a navegação autônoma
+### :toolbox: Material utilizado 
 
-Tal algoritmo foi desenvolvido a partir de funções declaradas que definem a movimentação do robô de acordo com os dados obtidos por meio dos sensores, seguindo a lógica presente no fluxograma abaixo:
+- 1 x Arduino MEGA 2560
+- 1 x Motor Shield L293D
+- 4 x Motor JGB37-520 DC12V333RPM
+- 3 x Sensor Ultrassônico HC-SR04
+- 1 x Módulo Encoder Acoplador Óptico
+- 1 x Disco Encoder
+- 1 x Raspberry Pi 4
+- 1 x Powerbank
+- 1 x Fonte Externa de 12V
+- 1 x Botão on/off
+- 1 x Chassi
+- 4 x Mecanum Wheels
+- 1 x Computador para acesso remoto ao robô
 
-   ![](/home/emanuelle/Downloads/Fluxograma.drawio.png) 
-   
-#### Montagem do robô
+A parte mecânica do robô é constituída por uma placa metálica com furos para fixação de componentes, quatro mecanum wheels e quatro motores  JGB37-520 DC12V333RPM, cada um com uma roda acoplada.
+
+Levando em consideração o número de componentes a serem utilizados no projeto, foi-se escolhido o Arduino MEGA 2560, um modelo com 54 pinos digitais e 16 pinos analógicos. Seu microcontrolador é o ATmega2560, com clock de 16MHz, 256KB de memória Flash, 8KB de RAM e 4 KB de EEPROM.
+
+Para o controle dos motores DC foi utilizada a Motor Shield L293D, um módulo que apresenta slots para conexão direta com a placa do Arduino. Esse módulo permite o controle de 2 Servos, 2 motores de passo ou o acionamento de até 4 motores DC, além de possibilitar o controle individual de cada motor.
+
+Após conectar a shield à placa do Arduino, foi realizada a ligação com os motores DC e com uma fonte externa de 12V para a alimentação do módulo e do arduino, também foi utilizado um interruptor, responsável por ligar e desligar a alimentação.
+
+![Untitled Diagram drawio](https://user-images.githubusercontent.com/108027884/224192878-23a8c6f2-65d0-458e-8809-e2813813fe2e.png)
+
+Ao decorrer do projeto foram acrescentados três sensores ultrassônicos à placa do Arduino, um localizado na frente do robô, um na parte esquerda e outro na parte direita, além de um sensor de velocidade e um disco encoder feito em uma impressora 3D, utilizados para medir a rotação do motor M3.
+
+![sensores](https://user-images.githubusercontent.com/108027884/224193508-bc4ad1bd-a6c4-4d4e-bbe3-e7280e65f47b.jpg)
+
+![IMG-20220224-WA0055](https://user-images.githubusercontent.com/108027884/224193161-c4e17247-7e14-4700-a02d-9f8adf2e807b.jpeg)
+
+Por fim, para ser possível a comunicação via USB entre o Raspberry Pi 4  e o Arduino MEGA 2560, adicionou-se uma base metálica ao robô, na qual foi usada para posicionar o Raspberry e uma Power Bank de 12V para sua alimentação.
+
+![20220225_171350](https://user-images.githubusercontent.com/108027884/224191454-f43afbc0-9a0c-495b-b19a-76f633c998f0.jpg)
 
 
+### :compass: Lógica de movimentação 
 
+O algoritmo foi desenvolvido a partir de funções declaradas que definem a movimentação do robô de acordo com os dados obtidos por meio dos sensores, seguindo a lógica presente no fluxograma abaixo:
 
-#### Algoritmo
+   ![Fluxograma drawio](https://user-images.githubusercontent.com/108027884/224190799-2f68cf79-1f02-48f9-8ce8-bc4d039941b2.png) 
 
-    /*
-    
-     *  EMANUELLE GONÇALVES PAULINO
-     *  ROSSERIAL COM SENSORES ULTRASSONICOS E SENSOR DE VELOCIDADE
-        */
-    
-    #include <Ultrasonic.h>
-    #include <AFMotor.h>
-    #include <ros.h>
-    #include <sensor_msgs/Range.h>
-    #include <std_msgs/UInt16.h>
-    
-    ros::NodeHandle  nh;
-    
-    int d0 = 2;
-    int rpm;
-    volatile byte pulsos;
-    unsigned long timeold;
-    
-    unsigned int pulsos_por_volta = 20;
-    
-    void contador() {
-      pulsos++;
-    }
-    
-    std_msgs::UInt16 rpm_msg;
-    ros::Publisher chatter("rpm", &rpm_msg);
-    
-    // Declaração das posições de controle para os motores
-    AF_DCMotor motor1(1);
-    AF_DCMotor motor2(2);
-    AF_DCMotor motor3(3);
-    AF_DCMotor motor4(4);
-    
-    // Declaração dos sensores ultrassônicos
-    Ultrasonic ultra_fre (40, 38);
-    Ultrasonic ultra_esq (27, 26);
-    Ultrasonic ultra_dir (46, 48);
-    
-    sensor_msgs::Range range_msg;
-    
-    sensor_msgs::Range range_front;
-    sensor_msgs::Range range_left;
-    sensor_msgs::Range range_right;
-    
-    ros::Publisher pub_range_front("/Sensor_da_frente", &range_front);
-    ros::Publisher pub_range_left("/Sensor_da_esquerda", &range_left);
-    ros::Publisher pub_range_right("/Sensor_da_direita", &range_right);
-    
-    void info_inic(sensor_msgs::Range &range_name, char *frameid)
-    {
-      range_name.radiation_type = sensor_msgs::Range::ULTRASOUND;
-      range_name.header.frame_id = frameid;
-      range_name.field_of_view = 0.26; // em radianos
-      range_name.min_range = 2; // em cm
-      range_name.max_range = 400; // em cm
-    }
-    
-    void setup() {
-    
-      Serial.begin(9600);
-    
-      nh.initNode();
-    
-      pinMode(d0, INPUT);
-      attachInterrupt(0, contador, FALLING);
-      pulsos = 0;
-      rpm = 0;
-      timeold = 0;
-    
-      nh.advertise(chatter);
-    
-      motor1.setSpeed(110); 
-      motor2.setSpeed(110);
-      motor3.setSpeed(110); 
-      motor4.setSpeed(110);
-    
-      nh.advertise(pub_range_front);
-      nh.advertise(pub_range_left);
-      nh.advertise(pub_range_right);
-    
-      info_inic(range_front, "/Sensor_da_frente");
-      info_inic(range_left, "/Sensor_da_esquerda");
-      info_inic(range_right, "/Sensor_da_direita");
-    }
-    
-    void loop() {
-    
-      if (millis() - timeold >= 1000) {
-    detachInterrupt(0);
-    rpm = (60000 / pulsos_por_volta ) / (millis() - timeold) * pulsos;
-    timeold = millis();
-    pulsos = 0;
-    
-    rpm_msg.data = rpm;
-    chatter.publish( &rpm_msg );
-    
-    attachInterrupt(0, contador, FALLING);
-    }
-        
-      // Declaração de variáveis para as distâncias lidas pelos sensores ultrassônicos
-      float dist_fre = ultra_fre.read();
-      float dist_esq = ultra_esq.read();
-      float dist_dir = ultra_dir.read();
-    
-      range_front.range = dist_fre;
-      range_left.range = dist_esq;
-      range_right.range = dist_dir;
-    
-      range_front.header.stamp = nh.now();
-      range_left.header.stamp = nh.now();
-      range_right.header.stamp = nh.now();
-    
-      pub_range_front.publish(&range_front);
-      pub_range_left.publish(&range_left);
-      pub_range_right.publish(&range_right);
-    
-      nh.spinOnce();
-    
-      // Desvio de obstáculos:
-      //Não terá obstáculos em nenhuma direção
-      if ((dist_fre > 40) and (dist_dir > 40) and (dist_esq > 40)) {
-        frente();
-      }
-      // Obstáculo detectado à frente
-      if ((dist_fre <= 40) and (dist_dir > 40)) {
-        direita();
-      }
-      // Obstáculos detectados à frente e à direita
-      if ((dist_fre <= 40) and (dist_dir <= 40) and (dist_esq > 40)) {
-        esquerda();
-      }
-      //Obstáculos detectados em todas as opções
-      if ((dist_fre <= 40) and (dist_dir <= 40) and (dist_esq <= 40)) {
-        parar();
-      }
-    }
-    
-    // Funções declaradas para a movimentação do robô:
-    
-    void frente() {
-      motor1.run(FORWARD); 
-      motor2.run(FORWARD); 
-      motor3.run(FORWARD); 
-      motor4.run(FORWARD);
-    }
-    void parar() {
-      motor1.run(RELEASE); 
-      motor2.run(RELEASE); 
-      motor3.run(RELEASE);
-      motor4.run(RELEASE);
-    }
-    void direita() {
-      motor1.run(FORWARD);
-      motor2.run(BACKWARD); 
-      motor3.run(BACKWARD);
-      motor4.run(FORWARD);
-    }
-    
-    void esquerda() {
-      motor1.run(BACKWARD);
-      motor2.run(FORWARD); 
-      motor3.run(FORWARD);
-      motor4.run(BACKWARD);
-    }
+### :movie_camera: Vídeo com os resultados obtidos 
 
+https://www.youtube.com/watch?v=7Vnkp2oUJuo&t=216s
