@@ -1,6 +1,6 @@
 # Robô Autônomo
 
-Neste projeto foi desenvolvido um robô capaz de se locomover de forma autônoma, por meio do processamento dos dados de interação sensorial com o ambiente, através da comunicação serial entre o ROS e o Arduino. 
+Neste projeto foi desenvolvido um robô capaz de se locomover de forma autônoma, por meio do processamento dos dados de interação sensorial com o ambiente, através da comunicação serial entre o ROS e o Arduino. O robô utilizou para detecção de obstáculos sensores ultrassônicos e a velocidade de uma de suas rodas pôde ser lida por meio de um sensor de velocidade. Os dados obtidos pelos sensores foram acessados de forma remota, enquanto o rob
 
 ### Material utilizado
 
@@ -76,6 +76,9 @@ ssh {user}@{host}
 Tal algoritmo foi desenvolvido a partir de funções declaradas que definem a movimentação do robô de acordo com os dados obtidos por meio dos sensores, seguindo a lógica presente no fluxograma abaixo:
 
    ![](/home/emanuelle/Downloads/Fluxograma.drawio.png) 
+   
+#### Montagem do robô
+
 
 
 
